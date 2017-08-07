@@ -29,6 +29,7 @@ public class UserController {
     @ApiOperation(value = "新增", notes = "新增一个用户", httpMethod = "POST")
     @Transactional(propagation = Propagation.REQUIRED)
     public Response add(@ApiParam @RequestBody UserVo userVo) {
+        
         userRepository.save(modelMapper.map(userVo, User.class));
         return Response.newNormalResponse();
     }
