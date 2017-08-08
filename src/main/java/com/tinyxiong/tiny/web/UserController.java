@@ -3,6 +3,7 @@ package com.tinyxiong.tiny.web;
 import com.tinyxiong.tiny.common.Response;
 import com.tinyxiong.tiny.domain.User;
 import com.tinyxiong.tiny.repository.UserRepository;
+import com.tinyxiong.tiny.service.UserService;
 import com.tinyxiong.tiny.vo.UserVo;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -29,8 +30,9 @@ public class UserController {
     @ApiOperation(value = "新增", notes = "新增一个用户", httpMethod = "POST")
     @Transactional(propagation = Propagation.REQUIRED)
     public Response add(@ApiParam @RequestBody UserVo userVo) {
-        
-        userRepository.save(modelMapper.map(userVo, User.class));
+
+        userService.save(userVo);
+
         return Response.newNormalResponse();
     }
 }
