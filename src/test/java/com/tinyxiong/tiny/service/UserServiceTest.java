@@ -5,6 +5,8 @@ import com.tinyxiong.tiny.vo.UserVo;
 import common.AbstractComponentTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 public class UserServiceTest extends AbstractComponentTest {
 
@@ -12,9 +14,10 @@ public class UserServiceTest extends AbstractComponentTest {
     private UserService userService;
 
     @Test
+    @Transactional
     public void testSave(){
         UserVo uservo = new UserVo();
-        uservo.setName("testNG test");
+        uservo.setName("rollback");
         uservo.setEnabled(EnabledType.ENABLED);
         uservo.setOrgId(1L);
         uservo.setPassword("111");
